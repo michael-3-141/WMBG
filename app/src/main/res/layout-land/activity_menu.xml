@@ -37,4 +37,13 @@
         android:layout_alignTop="@+id/btnScanBook"
         android:layout_toRightOf="@+id/textView1" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings"
+        android:id="@+id/button"
+        android:layout_below="@+id/btnScanBook"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp" />
+
 </RelativeLayout>

@@ -4,9 +4,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -24,10 +26,10 @@ import com.nhaarman.listviewanimations.itemmanipulation.OnDismissCallback;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.SwipeDismissAdapter;
 import com.perlib.wmbg.R;
 import com.perlib.wmbg.book.Book;
-import com.perlib.wmbg.book.Settings;
 import com.perlib.wmbg.interfaces.OnDownloadComplete;
 import com.perlib.wmbg.misc.BookAdapter;
 import com.perlib.wmbg.misc.CommonLib;
+import com.perlib.wmbg.misc.PrefKeys;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -41,7 +43,7 @@ public class MainActivity extends ActionBarActivity implements OnDownloadComplet
 	
 	public List<Book> items = new ArrayList<Book>();
 
-    private Settings settings;
+    private SharedPreferences prefs;
 	private ListView bookList;
 	private BookAdapter adapter;
 	private SwipeDismissAdapter swipeAdapter;
@@ -61,7 +63,8 @@ public class MainActivity extends ActionBarActivity implements OnDownloadComplet
 		etSearch = (EditText) findViewById(R.id.etSearch);
 
         //Load the settings. TODO: Replace with SharedPreferences
-		settings = CommonLib.loadSettings(getApplicationContext());
+		//settings = CommonLib.loadSettings(getApplicationContext());
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         //Load items from intent if exists
 		if(getIntent().getExtras() != null)
@@ -79,11 +82,11 @@ public class MainActivity extends ActionBarActivity implements OnDownloadComplet
 			@Override
 			public void onDismiss(AbsListView listView, int[] reverseSortedPositions) {
 			    for (int position : reverseSortedPositions) {
-			    	if(settings.getSwipeMode() == Settings.MODE_DELETE_ITEM)
+			    	if(PrefKeys.getSwipeMode(prefs) == PrefKeys.MODE_DELETE_ITEM)
 			    	{
 			    		deleteItem(position);
 			    	}
-			    	else if(settings.getSwipeMode() == Settings.MODE_RETURN_ITEM)
+			    	else if(PrefKeys.getSwipeMode(prefs) == PrefKeys.MODE_RETURN_ITEM)
 			    	{
 			    		returnItem(position);
 			    	}
@@ -93,7 +96,7 @@ public class MainActivity extends ActionBarActivity implements OnDownloadComplet
 		});
 
         //Apply swipe feature if setting is on.
-		if(settings.getSwipeMode() == Settings.MODE_NOTHING)
+		if(PrefKeys.getSwipeMode(prefs) == PrefKeys.MODE_NOTHING)
 		{
 			bookList.setAdapter(adapter);
 		}
@@ -148,7 +151,7 @@ public class MainActivity extends ActionBarActivity implements OnDownloadComplet
 								uriText =
 								"mailto:"+items.get(position).getEmail() + 
 								"?subject=" + Uri.encode(getString(R.string.emailSubject), "UTF-8") + 
-								"&body=" + Uri.encode(settings.getEmailMessage().replaceAll("@book@", items.get(position).getName()));
+								"&body=" + Uri.encode(PrefKeys.getEmailMessage(prefs).replaceAll("@book@", items.get(position).getName()));
 								Uri uri = Uri.parse(uriText);
 						        Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
 						        sendEmail.setData(uri);
@@ -212,7 +215,7 @@ public class MainActivity extends ActionBarActivity implements OnDownloadComplet
 	private void deleteItem(final int position)
 	{
         //Check if delete confirmation is on
-		if(settings.isConfirmDelete())
+		if(PrefKeys.isConfirmDelete(prefs))
 		{
             //Create dialog, and set button
 			AlertDialog.Builder delete_builder = new AlertDialog.Builder(MainActivity.this);

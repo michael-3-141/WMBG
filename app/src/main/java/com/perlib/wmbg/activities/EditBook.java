@@ -1,14 +1,11 @@
 package com.perlib.wmbg.activities;
 
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.List;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -22,6 +19,11 @@ import com.perlib.wmbg.book.Book;
 import com.perlib.wmbg.fragments.BookFragment;
 import com.perlib.wmbg.interfaces.BookContainerActivity;
 import com.perlib.wmbg.misc.CommonLib;
+import com.perlib.wmbg.misc.PrefKeys;
+
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  * The EditBook activity.
@@ -82,7 +84,7 @@ public class EditBook extends ActionBarActivity implements BookContainerActivity
 			@Override
 			public void onClick(View v) {
 				
-				CommonLib.deleteItem(editPos, CommonLib.loadSettings(getApplicationContext()), EditBook.this, new DialogInterface.OnClickListener() {
+				CommonLib.deleteItem(editPos, PreferenceManager.getDefaultSharedPreferences(EditBook.this), EditBook.this, new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -118,7 +120,7 @@ public class EditBook extends ActionBarActivity implements BookContainerActivity
 				uriText =
 				"mailto:" + editedItem.getEmail() + 
 				"?subject=" + Uri.encode(getString(R.string.emailSubject), "UTF-8") + 
-				"&body=" + Uri.encode(CommonLib.loadSettings(getApplicationContext()).getEmailMessage().replaceAll("@book@", editedItem.getName()));
+				"&body=" + Uri.encode(PrefKeys.getEmailMessage(PreferenceManager.getDefaultSharedPreferences(EditBook.this)).replaceAll("@book@", editedItem.getName()));
 				Uri uri = Uri.parse(uriText);
 		        Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
 		        sendEmail.setData(uri);

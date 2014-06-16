@@ -1,7 +1,9 @@
 package com.perlib.wmbg.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -13,65 +15,52 @@ import android.widget.Spinner;
 import android.widget.ToggleButton;
 
 import com.perlib.wmbg.R;
-import com.perlib.wmbg.book.Settings;
-import com.perlib.wmbg.misc.CommonLib;
+import com.perlib.wmbg.misc.PrefKeys;
 
-/**
- * The activity that handles the settings.
- */
+
 public class SettingsActivity extends ActionBarActivity {
 
-	/** The custom message. */
 	EditText customMessage;
-	
-	/** The btn save. */
 	Button btnSave;
-	
-	/** The settings. */
-	Settings settings;
-	
-	/** The tb delete confirm. */
 	ToggleButton tbDeleteConfirm;
-	
-	/** The sp swipe mode. */
 	Spinner spSwipeMode;
+
+    SharedPreferences prefs;
 	
-	/**
-	 *  Called when the activity is first created.
-	 *
-	 * @param savedInstanceState the saved instance state
-	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.activity_settings);
-	    
+
+        //Setup action bar
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
-		
+
+        //View references
 	    customMessage = (EditText) findViewById(R.id.customMessage);
 	    btnSave = (Button) findViewById(R.id.btnSave);
 	    tbDeleteConfirm = (ToggleButton)findViewById(R.id.tbDeleteConfirm);
 	    spSwipeMode = (Spinner)findViewById(R.id.spSwipeMode);
-	    
-	    settings = CommonLib.loadSettings(getApplicationContext());
-	    customMessage.setText(settings.getEmailMessage());
-	    tbDeleteConfirm.setChecked(settings.isConfirmDelete());
+
+        //Load settings and populate fields
+	    prefs = PreferenceManager.getDefaultSharedPreferences(this);
+	    customMessage.setText(PrefKeys.getEmailMessage(prefs));
+	    tbDeleteConfirm.setChecked(PrefKeys.isConfirmDelete(prefs));
 	    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.swipemodes, android.R.layout.simple_spinner_item);
 	    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	    spSwipeMode.setAdapter(adapter);
-	    spSwipeMode.setSelection(settings.getSwipeMode());
+	    spSwipeMode.setSelection(PrefKeys.getSwipeMode(prefs));
 	    
 	    btnSave.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				settings.setEmailMessage(customMessage.getText().toString());
-				settings.setConfirmDelete(tbDeleteConfirm.isChecked());
-				settings.setSwipeMode(spSwipeMode.getSelectedItemPosition());
-				CommonLib.saveSettings(settings);
-				Intent main = new Intent(getApplicationContext(), MainActivity.class);
-				main.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //Save all settings and open main menu activity
+                prefs.edit().putString(PrefKeys.EMIAL_MESSAGE, customMessage.getText().toString())
+                            .putBoolean(PrefKeys.CONFIRM_DELETE,tbDeleteConfirm.isChecked())
+                            .putInt(PrefKeys.SWIPE_MODE, spSwipeMode.getSelectedItemPosition())
+                    .commit();
+				Intent main = new Intent(getApplicationContext(), MainMenu.class);
 				startActivity(main);
 			}
 		});

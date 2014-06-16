@@ -5,7 +5,7 @@ import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -21,7 +21,6 @@ import com.google.gson.GsonBuilder;
 import com.perlib.wmbg.R;
 import com.perlib.wmbg.asynctasks.DownloadBookInfoTask;
 import com.perlib.wmbg.book.Book;
-import com.perlib.wmbg.book.Settings;
 import com.perlib.wmbg.interfaces.OnDownloadComplete;
 
 import java.io.BufferedReader;
@@ -37,9 +36,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * The Class Library.
- */
 public class CommonLib {
 
 	
@@ -62,34 +58,6 @@ public class CommonLib {
 				bookArray = list.toArray(bookArray);
 				Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 				String json = gson.toJson(bookArray);
-				//Log.d("json", json);
-				bw.write(json+eol);
-				bw.close();
-				
-				
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	/**
-	 * Save settings.
-	 *
-	 * @param settings the settings
-	 */
-	public static void saveSettings(Settings settings)
-	{
-		String eol = System.getProperty("line.separator");
-		File externalStorage = Environment.getExternalStorageDirectory();
-		if(externalStorage.canWrite())
-		{
-			File bookList = new File(externalStorage,"settings.txt");
-			try {
-				FileWriter fw = new FileWriter(bookList);
-				BufferedWriter bw = new BufferedWriter(fw);
-				Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-				String json = gson.toJson(settings);
 				//Log.d("json", json);
 				bw.write(json+eol);
 				bw.close();
@@ -177,40 +145,7 @@ public class CommonLib {
 	    }
         return results;
    }
-	
-	/**
-	 * Load settings.
-	 *
-	 * @param cx the cx
-	 * @return the settings
-	 */
-	public static Settings loadSettings(Context cx)
-	{
-		//String eol = System.getProperty("line.separator");
-		String fs = System.getProperty("file.separator");
-		File sd = Environment.getExternalStorageDirectory();
-		File listfile = new File(sd+fs+"settings.txt");
-		Settings settings = new Settings(cx);
-		if(listfile.exists())
-		{
-			try {
-				BufferedReader br = new BufferedReader(new FileReader(listfile));
-				
-				String line;
-				Gson gson = new Gson();
-				while((line = br.readLine()) != null)
-				{
-					settings = gson.fromJson(line, Settings.class);
-				}
-				br.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return settings;
-	}
+
 	
 	/**
 	 * Checks if is connected to internet.
@@ -259,14 +194,15 @@ public class CommonLib {
 	 * Delete item.
 	 *
 	 * @param position the position
-	 * @param settings the settings
+	 * @param prefs the settings
 	 * @param cx the cx
 	 * @param listener the listener
 	 * @param items the items
 	 */
-	public static void deleteItem(final int position, Settings settings, Context cx, DialogInterface.OnClickListener listener, List<Book> items)
+	public static void deleteItem(final int position, SharedPreferences prefs, Context cx, DialogInterface.OnClickListener listener, List<Book> items)
 	{
-		if(settings.isConfirmDelete())
+
+		if(PrefKeys.isConfirmDelete(prefs))
 		{
 			AlertDialog.Builder delete_builder = new AlertDialog.Builder(cx);
 			delete_builder.setPositiveButton(cx.getString(R.string.deleteYes) , listener);
@@ -303,41 +239,8 @@ public class CommonLib {
 		CommonLib.saveInfo(items);
 		return items;
 	}
-	
-	/**
-	 * Return or delete item.
-	 *
-	 * @param position the position
-	 * @param cx the cx
-	 * @param items the items
-	 * @param listener the listener
-	 * @param settings the settings
-	 */
-	public static void returnOrDeleteItem(final int position, final Context cx, final List<Book> items, final OnClickListener listener, final Settings settings)
-	{
-		AlertDialog.Builder delete_or_return_builder = new AlertDialog.Builder(cx);
-		delete_or_return_builder.setPositiveButton(cx.getString(R.string.chooseReturn) , new DialogInterface.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				
-				returnItem(position, items);
-			}
-		});
-		delete_or_return_builder.setNegativeButton(cx.getString(R.string.chooseDelete), new DialogInterface.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				
-				deleteItem(position, settings, cx, listener, items);
-			}
-		});
-		delete_or_return_builder.setMessage(cx.getString(R.string.returnOrDelete));
-		AlertDialog dialog = delete_or_return_builder.create();
-		dialog.show();
-	}
-	
-	/**
+
+    /**
 	 * Load data.
 	 *
 	 * @return the list
