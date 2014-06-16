@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+		<fragment
+		    android:id="@+id/bookFragment"
+		    android:name="com.perlib.wmbg.fragments.BookFragment"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    tools:layout="@layout/fragment_book" />
+        
+		<TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dateLended" />
+
+        <DatePicker
+            android:id="@+id/dpDateLended"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:calendarViewShown="false" />
+
+        <Button
+            android:id="@+id/btnEditBook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/editBook" />
+
+        <Button
+            android:id="@+id/btnSendReminder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sendReminder" />
+
+        <Button
+            android:id="@+id/btnReturnBook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/markAsReturned" />
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#E60000"
+            android:text="@string/delete" />
+    </LinearLayout>
+
+</ScrollView>

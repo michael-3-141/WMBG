@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.perlib.wmbg"
+    android:versionCode="15"
+    android:versionName="1.3.1" android:installLocation="auto">
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="19" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.SET_DEBUG_APP"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
+    <application android:icon="@drawable/ic_launcher" android:allowBackup="true" android:label="@string/app_name" android:name="com.perlib.wmbg.misc.WMBGApplication">
+        <activity 
+            android:name=".activities.MainActivity"
+            android:theme="@style/Theme.AppCompat"
+            android:parentActivityName="com.perlib.wmbg.activities.MainMenu"
+            android:windowSoftInputMode="stateHidden">
+	            <meta-data
+	            android:name="android.support.PARENT_ACTIVITY"
+	            android:value="com.perlib.wmbg.activities.MainMenu" />
+        </activity>
+        <activity 
+            android:name=".activities.AddBook"
+            android:theme="@style/Theme.AppCompat"
+            android:parentActivityName="com.perlib.wmbg.activities.MainMenu">
+	            <meta-data
+	            android:name="android.support.PARENT_ACTIVITY"
+	            android:value="com.perlib.wmbg.activities.MainMenu" />
+        </activity>
+        <activity 
+            android:name=".activities.EditBook"
+            android:theme="@style/Theme.AppCompat"
+            android:parentActivityName="com.perlib.wmbg.activities.MainActivity">
+	            <meta-data
+	            android:name="android.support.PARENT_ACTIVITY"
+	            android:value="com.perlib.wmbg.activities.MainActivity" />
+        </activity>
+        <activity 
+            android:name=".activities.SettingsActivity"
+            android:theme="@style/Theme.AppCompat"
+            android:parentActivityName="com.perlib.wmbg.activities.MainMenu">
+	            <meta-data
+	            android:name="android.support.PARENT_ACTIVITY"
+	            android:value="com.perlib.wmbg.activities.MainMenu" />
+        </activity>
+        <activity 
+            android:name=".activities.MainMenu"
+            android:theme="@style/Theme.AppCompat">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            	<category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity 
+            android:name=".activities.ScanBook"
+            android:theme="@style/Theme.AppCompat"
+            android:parentActivityName="com.perlib.wmbg.activities.MainMenu">
+	            <meta-data
+	            android:name="android.support.PARENT_ACTIVITY"
+	            android:value="com.perlib.wmbg.activities.MainMenu" />
+        </activity>
+    </application>
+
+</manifest>

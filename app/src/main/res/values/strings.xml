@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string name="app_name">Where\'d My Book Go?</string>
+    <string name="addbook">Add New Book</string>
+    <string name="bookname">Book Name</string>
+    <string name="authorName">Author Name</string>
+    <string name="lendedTo">Lended To&#8230;</string>
+    <string name="editBook">Edit</string>
+    <string name="deleteConfirm">Are you sure you want to delete </string>
+    <string name="deleteConfirmTitle">Delete Confirmation</string>
+    <string name="deleteYes">Yes</string>
+    <string name="deleteCancel">Cancel</string>
+    <string name="isbnCode">ISBN Code</string>
+    <string name="getBookData">Get Book Data</string>
+    <string name="lendedToDisplay">Lended To: </string>
+    <string name="by">By: </string>
+    <string name="InvalidISBN">The ISBN code you entered was invalid or wasn\'t found in the database.</string>
+    <string name="noConnection">You are not connected to the internet. Please verify that you are connected and try again.</string>
+    <string name="scanIsbnBarcode">Scan ISBN Barcode</string>
+    <string name="email">Lended To Email (Optional)</string>
+    <string name="delete">Delete</string>
+    <string name="sendReminder">Send Reminder</string>
+    <string name="markAsReturned">Mark As Returned</string>
+    <string name="options">Options</string>
+    <string name="emailSubject">Lended Book Reminder</string>
+    <string name="emailBodyA">Hi, you have my book: \&quot;</string>
+    <string name="emailBodyB">\&quot;, could you please return it?</string>
+    <string name="sendEmail">Send Email&#8230;</string>
+    <string name="settings">Settings</string>
+    <string name="deafultEmailMessage">Deafult Email Message (Type @book@ for the book name):</string>
+    <string name="save">Save</string>
+    <string name="deleteByScan">Delete/Return By Scan</string>
+    <string name="duplicateBooks">Duplicate books found</string>
+	<string name="chooseDelete">Delete</string>
+	<string name="chooseReturn">Mark As Returned</string>
+	<string name="returnOrDelete">Do you want to delete or return the book?</string>
+	<string name="none">None</string>
+	<string name="deleteConfirmSetting">Show confirmation messages for delete.</string>
+    <string-array name="swipemodes">
+       <item >Delete</item>
+       <item >Mark As Returned</item>
+       <item>Nothing</item>
+   </string-array>
+   <string name="swipeModeText">Select what will happen when you swipe a list item: </string>
+   <string name="requiredBookNameError">The book name field is required. Please enter a book name and try again.</string>
+   <string name="dateLended">When was this book lended:</string>
+   <string name="searchBook">Serach Books</string>
+   <string name="scanBook">Scan Book</string>
+   <string name="manualAddBook">Manually Add Book</string>
+   <string name="youScanned">You scanned:</string>
+   <string name="addScannedBook">Add this book to list</string>
+   <string name="returnScannedBook">Return book from</string>
+   <string name="editScannedBook">Edit this book</string>
+   <string name="ok">OK</string>
+   <string name="dateLendedDisplay">Lended On: </string>
+   <string name="search">Search</string>
+   <string name="takePicture">Take a Picture</string>
+   <string name="url">Image Url&#8230;</string>
+    <string name="bookDownloadStarted">Getting boook data from google books, depending on your internet connection, this can take a while.</string>
+</resources>
