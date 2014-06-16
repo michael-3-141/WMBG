@@ -1,11 +1,5 @@
 package com.perlib.wmbg.misc;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.Locale;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -21,6 +15,12 @@ import com.perlib.wmbg.R;
 import com.perlib.wmbg.activities.MainActivity;
 import com.perlib.wmbg.book.Book;
 import com.squareup.picasso.Picasso;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 /**
  * A custom adapter to handle a list of books.
@@ -62,7 +62,7 @@ public class BookAdapter extends BaseAdapter implements Filterable {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) cx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View v = inflater.inflate(R.layout.simple_list_item_3, parent, false);
+		View v = inflater.inflate(R.layout.book_list_item, parent, false);
 
 		int colorPos = position % colors.length;
 		v.setBackgroundColor(colors[colorPos]);
@@ -110,12 +110,12 @@ public class BookAdapter extends BaseAdapter implements Filterable {
 		if(file != null)
 		{
 			if(file.exists()){
-				Picasso.with(cx).load(file).into(iv);
-				return v;
+				Picasso.with(cx).load(file).fit().into(iv);
+                return v;
 			}
 		}
 		
-		Picasso.with(cx).load(item.getThumbnailUrl()).into(iv);
+		Picasso.with(cx).load(item.getThumbnailUrl()).fit().into(iv);
 		
 		return v;
 	}

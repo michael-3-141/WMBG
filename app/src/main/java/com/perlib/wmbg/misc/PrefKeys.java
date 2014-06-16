@@ -2,6 +2,8 @@ package com.perlib.wmbg.misc;
 
 import android.content.SharedPreferences;
 
+import com.perlib.wmbg.R;
+
 public class PrefKeys {
     public static final String EMIAL_MESSAGE = "emailMessage";
     public static final String CONFIRM_DELETE = "doConfirmDelete";
@@ -13,7 +15,7 @@ public class PrefKeys {
 
     public static String getEmailMessage(SharedPreferences prefs)
     {
-        return prefs.getString(EMIAL_MESSAGE, "");
+        return prefs.getString(EMIAL_MESSAGE, WMBGApplication.getInstance().getString(R.string.emailBodyA) + "@book@" + WMBGApplication.getInstance().getString(R.string.emailBodyB));
     }
 
     public static boolean isConfirmDelete(SharedPreferences prefs)
