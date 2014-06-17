@@ -13,44 +13,44 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        android:id="@+id/btnSeachBooks"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/searchBook"
+        android:orientation="horizontal"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/textView1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:id="@+id/linearLayout">
+        <Button
+            android:id="@+id/btnSeachBooks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/searchBook" />
 
-    <Button
-        android:id="@+id/btnScanBook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/scanBook"
-        android:layout_alignTop="@+id/btnSeachBooks"
-        android:layout_toLeftOf="@+id/btnManualAddBook"
-        android:layout_alignLeft="@+id/btnSettings"
-        android:layout_alignStart="@+id/btnSettings" />
+        <Button
+            android:id="@+id/btnScanBook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/scanBook" />
 
-    <Button
-        android:id="@+id/btnManualAddBook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/manualAddBook"
-        android:layout_alignTop="@+id/btnScanBook"
-        android:layout_toRightOf="@+id/textView1"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        <Button
+            android:id="@+id/btnManualAddBook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/manualAddBook"/>
+
+    </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/settings"
         android:id="@+id/btnSettings"
-        android:layout_below="@+id/btnScanBook"
-        android:layout_marginTop="40dp"
-        android:layout_toLeftOf="@+id/btnManualAddBook"
+        android:layout_below="@+id/linearLayout"
+        android:layout_marginTop="53dp"
+        android:layout_alignRight="@+id/textView1"
+        android:layout_alignEnd="@+id/textView1"
         android:layout_alignLeft="@+id/textView1"
         android:layout_alignStart="@+id/textView1" />
 
