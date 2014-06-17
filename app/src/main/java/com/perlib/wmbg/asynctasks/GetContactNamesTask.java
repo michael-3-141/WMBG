@@ -1,16 +1,16 @@
 package com.perlib.wmbg.asynctasks;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.perlib.wmbg.interfaces.OnContactLoadingComplete;
-
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
 import android.util.Log;
+
+import com.perlib.wmbg.interfaces.OnContactLoadingComplete;
+
+import java.util.HashMap;
+import java.util.Map;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -42,9 +42,10 @@ public class GetContactNamesTask extends AsyncTask<Void, String, HashMap<Integer
 	@SuppressLint("UseSparseArrays")
 	@Override
 	protected HashMap<Integer, String> doInBackground(Void...nothing) {
+        Cursor cur = null;
 		Map<Integer, String> names = new HashMap<Integer, String>();
 		try{
-	        Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,null,null,null,null);
+	        cur = cr.query(ContactsContract.Contacts.CONTENT_URI,null,null,null,null);
 	        if (cur.getCount() > 0) {
 	            
 	        	
@@ -70,6 +71,7 @@ public class GetContactNamesTask extends AsyncTask<Void, String, HashMap<Integer
 	    } catch (NullPointerException e) {
 	        Log.i("AutocompleteContacts","Exception : "+ e);
 	    }
+        if(cur != null)cur.close();
 	    return (HashMap<Integer, String>) names;
 	}
 	

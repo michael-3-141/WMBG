@@ -18,27 +18,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:text="@string/searchBook" />
+        android:text="@string/searchBook"
+        android:layout_alignRight="@+id/textView1"
+        android:layout_alignEnd="@+id/textView1"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignStart="@+id/textView1" />
 
     <Button
         android:id="@+id/btnScanBook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnSeachBooks"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:text="@string/scanBook" />
+        android:text="@string/scanBook"
+        android:layout_alignRight="@+id/btnSeachBooks"
+        android:layout_alignEnd="@+id/btnSeachBooks"
+        android:layout_alignLeft="@+id/btnSeachBooks"
+        android:layout_alignStart="@+id/btnSeachBooks" />
 
     <Button
         android:id="@+id/btnManualAddBook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnScanBook"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:text="@string/manualAddBook" />
+        android:text="@string/manualAddBook"
+        android:layout_alignRight="@+id/btnScanBook"
+        android:layout_alignEnd="@+id/btnScanBook"
+        android:layout_alignLeft="@+id/btnScanBook"
+        android:layout_alignStart="@+id/btnScanBook" />
 
     <Button
         android:layout_width="wrap_content"
@@ -46,7 +55,10 @@
         android:text="@string/settings"
         android:id="@+id/btnSettings"
         android:layout_below="@+id/btnManualAddBook"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp" />
+        android:layout_marginTop="30dp"
+        android:layout_alignRight="@+id/btnManualAddBook"
+        android:layout_alignEnd="@+id/btnManualAddBook"
+        android:layout_alignLeft="@+id/btnManualAddBook"
+        android:layout_alignStart="@+id/btnManualAddBook" />
 
 </RelativeLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="wmbg" parent="@style/_wmbg"/>
+
+  <style name="_wmbg" parent="Theme.AppCompat.Light">
+
+    <item name="android:editTextBackground">@drawable/wmbg_edit_text_holo_light</item>
+
+    <item name="android:textColorHighlight">#9999cc00</item>
+    <item name="android:textSelectHandleLeft">@drawable/wmbg_text_select_handle_left</item>
+    <item name="android:textSelectHandleRight">@drawable/wmbg_text_select_handle_right</item>
+    <item name="android:textSelectHandle">@drawable/wmbg_text_select_handle_middle</item>
+
+    <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewwmbg</item>
+
+    <item name="android:listChoiceIndicatorMultiple">@drawable/wmbg_btn_check_holo_light</item>
+
+    <item name="android:listChoiceIndicatorSingle">@drawable/wmbg_btn_radio_holo_light</item>
+
+    <item name="android:buttonStyle">@style/Buttonwmbg</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonwmbg</item>
+
+    <item name="android:dropDownSpinnerStyle">@style/Spinnerwmbg</item>
+
+    <item name="android:progressBarStyleHorizontal">@style/ProgressBarwmbg</item>
+
+    <item name="android:seekBarStyle">@style/SeekBarwmbg</item>
+
+    <item name="android:ratingBarStyle">@style/RatingBarwmbg</item>
+
+    <item name="android:ratingBarStyleIndicator">@style/RatingBarBigwmbg</item>
+
+    <item name="android:ratingBarStyleSmall">@style/RatingBarSmallwmbg</item>
+
+    <item name="android:buttonStyleToggle">@style/Togglewmbg</item>
+
+    <item name="android:listChoiceBackgroundIndicator">@drawable/wmbg_list_selector_holo_light</item>
+
+    <item name="android:activatedBackgroundIndicator">@drawable/wmbg_activated_background_holo_light</item>
+
+    <item name="android:fastScrollThumbDrawable">@drawable/wmbg_fastscroll_thumb_holo</item>
+
+    <item name="android:actionBarStyle">@style/Theme.Wmbg_actionbar</item>
+
+  </style>
+
+</resources>

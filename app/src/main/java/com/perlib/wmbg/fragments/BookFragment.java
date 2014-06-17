@@ -1,7 +1,6 @@
 package com.perlib.wmbg.fragments;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +13,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -81,6 +81,7 @@ public class BookFragment extends Fragment implements OnContactLoadingComplete, 
         startContactSearch();
 
         //Set the adapter for lendedTo autocomplete
+        adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item);
         etBookLendedTo.setAdapter(adapter);
 
         //Listeners
@@ -169,6 +170,7 @@ public class BookFragment extends Fragment implements OnContactLoadingComplete, 
 	}
 
 	public void setViewedBook(Book viewedBook) {
+        if(viewedBook == null)return;
 		this.viewedBook = viewedBook;
 
         etBookName.setText(viewedBook.getName());
@@ -201,8 +203,7 @@ public class BookFragment extends Fragment implements OnContactLoadingComplete, 
 		    etBookThumbnailUri.setText(image.getAbsolutePath());
 		}
 	}
-	
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+
 	private void startContactSearch()
 	{
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
@@ -217,7 +218,8 @@ public class BookFragment extends Fragment implements OnContactLoadingComplete, 
 	
 	@Override
 	public void OnNameLoadingFinished(HashMap<Integer, String> result) {
-		nameIdMap = result;
+        Log.i("Autocomplecontacts", "Contact loading complete");
+        nameIdMap = result;
 		for(Entry<Integer, String> row : nameIdMap.entrySet())
 		{
 			if(row.getValue().length() != 0)
@@ -229,7 +231,6 @@ public class BookFragment extends Fragment implements OnContactLoadingComplete, 
 	}
 
 
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void executeEmailLoader(int id)
 	{
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)

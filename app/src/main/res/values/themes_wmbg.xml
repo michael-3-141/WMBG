@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="wmbg" parent="@style/_wmbg"/>
+
+  <style name="_wmbg" parent="Theme.AppCompat.Light">
+
+    <item name="android:editTextStyle">@style/EditTextwmbg</item>
+
+    <item name="android:textColorHighlight">#9999cc00</item>
+
+    <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewwmbg</item>
+
+    <item name="android:checkboxStyle">@style/CheckBoxwmbg</item>
+
+    <item name="android:radioButtonStyle">@style/RadioButtonwmbg</item>
+
+    <item name="android:buttonStyle">@style/Buttonwmbg</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonwmbg</item>
+
+    <item name="android:spinnerStyle">@style/Spinnerwmbg</item>
+
+    <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemwmbg</item>
+
+    <item name="android:progressBarStyleHorizontal">@style/ProgressBarwmbg</item>
+
+    <item name="android:seekBarStyle">@style/SeekBarwmbg</item>
+
+    <item name="android:ratingBarStyle">@style/RatingBarwmbg</item>
+
+    <item name="android:ratingBarStyleIndicator">@style/RatingBarBigwmbg</item>
+
+    <item name="android:ratingBarStyleSmall">@style/RatingBarSmallwmbg</item>
+
+    <item name="android:buttonStyleToggle">@style/Togglewmbg</item>
+
+    <item name="android:listViewStyle">@style/ListViewwmbg</item>
+
+    <item name="android:listViewWhiteStyle">@style/ListViewwmbg.White</item>
+
+    <item name="android:spinnerItemStyle">@style/SpinnerItemwmbg</item>
+
+    <item name="android:actionBarStyle">@style/Theme.Wmbg_actionbar</item>
+
+  </style>
+
+</resources>

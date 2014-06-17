@@ -153,6 +153,6 @@ public class AddBook extends ActionBarActivity implements OnDownloadComplete, Bo
     //Implement book container activity for book fragment to use
     @Override
     public Book getBook() {
-        return fmtBook.getViewedBook();
+        return null;
     }
 }

@@ -32,7 +32,7 @@ public class BookAdapter extends BaseAdapter implements Filterable {
 	private MainActivity activity;
 	
 	/** The colors. */
-	private int[] colors = new int[] { 0x30ffffff, 0x30808080 };
+	private int[] colors = new int[] { 0x30ffffff, 0x3099FF66 };
 	
 	/** The cx. */
 	private Context cx;
@@ -114,7 +114,8 @@ public class BookAdapter extends BaseAdapter implements Filterable {
                 return v;
 			}
 		}
-		
+
+        if(item.getThumbnailUrl() == "")return v;
 		Picasso.with(cx).load(item.getThumbnailUrl()).fit().into(iv);
 		
 		return v;
