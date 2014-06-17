@@ -25,6 +25,6 @@ public class PrefKeys {
 
     public static int getSwipeMode(SharedPreferences prefs)
     {
-        return prefs.getInt(SWIPE_MODE, 0);
+        return prefs.getInt(SWIPE_MODE, MODE_NOTHING);
     }
 }
