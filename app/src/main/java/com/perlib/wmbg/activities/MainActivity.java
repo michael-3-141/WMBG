@@ -356,5 +356,4 @@ public class MainActivity extends ActionBarActivity implements OnDownloadComplet
 		//EasyTracker.getInstance(this).activityStop(this);
 		CommonLib.saveInfo(items);
 	}
-	
 }

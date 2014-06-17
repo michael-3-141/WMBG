@@ -19,7 +19,7 @@
 
 <resources>
 
-    <style name="Theme.Wmbg_actionbar" parent="@style/Theme.AppCompat.Light">
+    <style name="Theme.Wmbg_actionbar" parent="@style/_wmbg">
         <item name="actionBarItemBackground">@drawable/selectable_background_wmbg_actionbar</item>
         <item name="popupMenuStyle">@style/PopupMenu.Wmbg_actionbar</item>
         <item name="dropDownListViewStyle">@style/DropDownListView.Wmbg_actionbar</item>

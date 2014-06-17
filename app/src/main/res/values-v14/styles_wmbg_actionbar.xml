@@ -16,10 +16,9 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
 <resources>
 
-    <style name="Theme.Wmbg_actionbar" parent="@style/Theme.AppCompat.Light">
+    <style name="Theme.Wmbg_actionbar" parent="@style/_wmbg">
         <item name="android:actionBarItemBackground">@drawable/selectable_background_wmbg_actionbar</item>
         <item name="android:popupMenuStyle">@style/PopupMenu.Wmbg_actionbar</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Wmbg_actionbar</item>
@@ -29,8 +28,8 @@
         <item name="android:actionModeBackground">@drawable/cab_background_top_wmbg_actionbar</item>
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_wmbg_actionbar</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Wmbg_actionbar</item>
-        
-        
+
+
     </style>
 
     <style name="ActionBar.Solid.Wmbg_actionbar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
