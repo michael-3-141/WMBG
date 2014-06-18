@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string name="app_name">Where\'d My Book Go?</string>
+    <string name="addbook">הוסף ספר חדש</string>
+    <string name="bookname">שם הספר</string>
+    <string name="authorName">שם המחבר</string>
+    <string name="lendedTo">שואל הספר</string>
+    <string name="editBook">ערוך</string>
+    <string name="deleteConfirm">האם אתה בטוח שאתה רוצה למחוק את </string>
+    <string name="deleteConfirmTitle">מחיקה</string>
+    <string name="deleteYes">כן</string>
+    <string name="deleteCancel">בטל</string>
+    <string name="isbnCode">קוד מסת"ב</string>
+    <string name="getBookData">הורד נתוני ספר</string>
+    <string name="lendedToDisplay">מושאל ל: </string>
+    <string name="by">שם המחבר: </string>
+    <string name="InvalidISBN">קוד המסת"ב שהזנת אינו תקין או שלא נמצא במאגר המידע</string>
+    <string name="noConnection">אינך מחובר לאינטרנט. אנא וודא שאתה מחובר ונסה שוב.</string>
+    <string name="scanIsbnBarcode">סרוק ברקוד</string>
+    <string name="email">כתובת אימייל של שואל הספר</string>
+    <string name="delete">מחק</string>
+    <string name="sendReminder">שלח תזכורת לשואל</string>
+    <string name="markAsReturned">סמן כהוחזר</string>
+    <string name="options">אפשרויות</string>
+    <string name="emailSubject">תזכורת השאלת ספר</string>
+    <string name="emailBodyA">שלום, יש לך את הספר: \&quot;</string>
+    <string name="emailBodyB">\&quot;, שלי. אתה יכול להחזיר אותו בבקשה?</string>
+    <string name="sendEmail">שלח אימייל</string>
+    <string name="settings">הגדרות</string>
+    <string name="deafultEmailMessage">תזכורת השאלה ברירת מחדל: ("@book@" יוחלף בשם הספר כשתשלח תזכורת)</string>
+    <string name="save">שמור</string>
+    <string name="deleteByScan">מחק\החזר בסריקה</string>
+    <string name="duplicateBooks">נמצאו ספרים כפולים</string>
+    <string name="chooseDelete">מחק</string>
+    <string name="chooseReturn">סמן כהוחזר</string>
+    <string name="returnOrDelete">האם אתה רוצה למחוק או להחזיר את הספר?</string>
+    <string name="none">לא מושאל</string>
+    <string name="deleteConfirmSetting">שאל לפני מחיקת פריט</string>
+    <string-array name="swipemodes">
+        <item >מחק</item>
+        <item >סמן כהוחזר</item>
+        <item>כלום</item>
+    </string-array>
+    <string name="swipeModeText">Select what will happen when you swipe a list item: </string>
+    <string name="requiredBookNameError">חובה לכתוב את שם הספר.</string>
+    <string name="dateLended">מתי הושאל הספר:</string>
+    <string name="searchBook">הספרים שלי</string>
+    <string name="scanBook">סרוק ברקוד</string>
+    <string name="manualAddBook">הוסף ספר ללא סריקה</string>
+    <string name="youScanned">סרקת את:</string>
+    <string name="addScannedBook">הוסף ספר זה לרשימת הספרים שלך</string>
+    <string name="returnScannedBook">החזר את הספר מ: </string>
+    <string name="editScannedBook">ערוך את הספר</string>
+    <string name="ok">OK</string>
+    <string name="dateLendedDisplay">הושאל ב: </string>
+    <string name="search">חיפוש</string>
+    <string name="takePicture">צלם תמונה</string>
+    <string name="url">כתובת התמונה</string>
+    <string name="bookDownloadStarted">מקבל את נתוני הספר ממאגר המידע.</string>
+</resources>
