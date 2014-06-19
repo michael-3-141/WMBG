@@ -33,6 +33,7 @@ public class MainMenu extends Activity implements OnDownloadComplete {
 	Button btnScanBook;
 	Button btnManualAddBook;
     Button btnSettings;
+    Button btnHelp;
 	
 	IntentIntegrator scanIntegrator = new IntentIntegrator(this);
 	List<Book> items = new ArrayList<Book>();
@@ -48,6 +49,7 @@ public class MainMenu extends Activity implements OnDownloadComplete {
 	    btnScanBook = (Button) findViewById(R.id.btnScanBook);
 	    btnManualAddBook = (Button) findViewById(R.id.btnManualAddBook);
         btnSettings = (Button) findViewById(R.id.btnSettings);
+        btnHelp = (Button) findViewById(R.id.btnHelp);
 
         //Load items from file.
 	    loadData();
@@ -94,6 +96,16 @@ public class MainMenu extends Activity implements OnDownloadComplete {
                 //Go to settings
                 Intent settings = new Intent(getApplicationContext(), SettingsActivity.class);
                 startActivity(settings);
+            }
+        });
+
+        //Help
+        btnHelp.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Go to help
+                Intent help = new Intent(MainMenu.this, HelpActivity.class);
+                startActivity(help);
             }
         });
 	}

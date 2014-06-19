@@ -110,28 +110,24 @@ public class BookAdapter extends BaseAdapter implements Filterable {
 		if(file != null)
 		{
 			if(file.exists()){
-				Picasso.with(cx).load(file).fit().into(iv);
+				Picasso.with(cx).load(file).fit().centerCrop().into(iv);
                 return v;
 			}
 		}
 
         if(item.getThumbnailUrl() == "")return v;
-		Picasso.with(cx).load(item.getThumbnailUrl()).fit().into(iv);
+		Picasso.with(cx).load(item.getThumbnailUrl()).fit().centerCrop().into(iv);
 		
 		return v;
 	}
 
-	/* (non-Javadoc)
-	 * @see android.widget.Adapter#getCount()
-	 */
+
 	@Override
 	public int getCount() {
 		return !filtered ? activity.items.size() : FilteredList.size();
 	}
 
-	/* (non-Javadoc)
-	 * @see android.widget.Adapter#getItem(int)
-	 */
+
 	@Override
 	public Book getItem(int position) {
 		return !filtered ? activity.items.get(position) : FilteredList.get(position);

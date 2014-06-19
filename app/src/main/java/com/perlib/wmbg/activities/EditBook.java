@@ -146,12 +146,13 @@ public class EditBook extends ActionBarActivity implements BookContainerActivity
 					CommonLib.saveInfo(items);
 
                     //Start main activity
-					Intent main = new Intent(getApplicationContext(), MainActivity.class);
+					/*Intent main = new Intent(getApplicationContext(), MainActivity.class);
 					Bundle b = new Bundle();
 					b.putParcelableArrayList("items", (ArrayList<? extends Parcelable>) items);
 					main.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					main.putExtras(b);
-					startActivity(main);
+					startActivity(main);*/
+                    onBackPressed();
 					finish();
 				}
 				else

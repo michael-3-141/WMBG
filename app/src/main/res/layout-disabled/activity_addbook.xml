@@ -35,7 +35,7 @@
 	        android:id="@+id/btnAddBook"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:text="@string/addbook" />
+	        android:text="@string/save" />
 	
 	</LinearLayout>
 </ScrollView>

@@ -37,11 +37,11 @@ android.signingConfigs.release.keyAlias props.keyAlias
 android.signingConfigs.release.keyPassword props.keyAliasPassword
 
 dependencies {
-    compile 'com.google.code.gson:gson:2.2.4'
-    compile 'com.android.support:appcompat-v7:+'
     compile files('libs/android-integration-2.3.0.jar')
     compile files('libs/com.haarman.listviewanimations-2.6.0.jar')
     compile files('libs/libGoogleAnalyticsServices.jar')
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.android.support:appcompat-v7:19.+'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.squareup.picasso:picasso:2.2.0'
 }

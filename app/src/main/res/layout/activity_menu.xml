@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="16dp"
         android:text="@string/app_name"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -60,5 +60,17 @@
         android:layout_alignEnd="@+id/btnManualAddBook"
         android:layout_alignLeft="@+id/btnManualAddBook"
         android:layout_alignStart="@+id/btnManualAddBook" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/help"
+        android:id="@+id/btnHelp"
+        android:layout_below="@+id/btnSettings"
+        android:layout_marginTop="30dp"
+        android:layout_alignRight="@+id/btnSettings"
+        android:layout_alignEnd="@+id/btnSettings"
+        android:layout_alignLeft="@+id/btnSettings"
+        android:layout_alignStart="@+id/btnSettings" />
 
 </RelativeLayout>

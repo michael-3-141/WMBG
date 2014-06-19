@@ -170,7 +170,11 @@ public class BookFragment extends Fragment implements OnContactLoadingComplete, 
 	}
 
 	public void setViewedBook(Book viewedBook) {
-        if(viewedBook == null)return;
+        if(viewedBook == null)
+        {
+            this.viewedBook = new Book();
+            return;
+        }
 		this.viewedBook = viewedBook;
 
         etBookName.setText(viewedBook.getName());
