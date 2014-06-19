@@ -71,7 +71,7 @@
         <activity
             android:name=".activities.HelpActivity"
             android:label="@string/help"
-            android:parentActivityName=".MainMenu" >
+            android:parentActivityName=".activities.MainMenu" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainMenu" />
