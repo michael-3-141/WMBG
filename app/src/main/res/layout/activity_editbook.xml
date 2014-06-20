@@ -32,7 +32,7 @@
             android:id="@+id/btnEditBook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/editBook" />
+            android:text="@string/save" />
 
         <Button
             android:id="@+id/btnSendReminder"

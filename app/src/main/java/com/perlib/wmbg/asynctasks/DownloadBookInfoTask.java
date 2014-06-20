@@ -1,18 +1,18 @@
 package com.perlib.wmbg.asynctasks;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 import android.os.AsyncTask;
 
 import com.google.gson.Gson;
 import com.perlib.wmbg.book.Book;
 import com.perlib.wmbg.book.GoogleBooksBook;
 import com.perlib.wmbg.interfaces.OnDownloadComplete;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 // TODO: Auto-generated Javadoc
 /**

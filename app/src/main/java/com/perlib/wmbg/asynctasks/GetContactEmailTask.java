@@ -1,11 +1,11 @@
 package com.perlib.wmbg.asynctasks;
 
-import com.perlib.wmbg.interfaces.OnEmailLoadingListener;
-
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
+
+import com.perlib.wmbg.interfaces.OnEmailLoadingListener;
 
 // TODO: Auto-generated Javadoc
 /**

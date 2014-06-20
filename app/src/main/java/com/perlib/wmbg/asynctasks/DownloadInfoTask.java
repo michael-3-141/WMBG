@@ -1,7 +1,8 @@
 package com.perlib.wmbg.asynctasks;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import android.os.AsyncTask;
+
+import com.perlib.wmbg.interfaces.OnDownloadComplete;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -11,9 +12,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import com.perlib.wmbg.interfaces.OnDownloadComplete;
-
-import android.os.AsyncTask;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 /**
  * Async task to download a book from isbnDB.
