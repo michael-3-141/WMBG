@@ -229,6 +229,10 @@ public class BookFragment extends Fragment implements OnContactLoadingComplete, 
 			if(row.getValue().length() != 0)
 			{
 				adapter.add(row.getValue());
+                if(row.getValue().contains("Aharon"))
+                {
+                    Log.i("Autocompletecontacts", row.getValue());
+                }
 			}
 		}
 	    adapter.notifyDataSetChanged();

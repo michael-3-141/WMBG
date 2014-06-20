@@ -12,33 +12,21 @@ import com.perlib.wmbg.interfaces.OnContactLoadingComplete;
 import java.util.HashMap;
 import java.util.Map;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class GetContactNames.
- */
 public class GetContactNamesTask extends AsyncTask<Void, String, HashMap<Integer, String>> {
 
-	/** The listener. */
+	
 	private OnContactLoadingComplete listener;
 	
-	/** The cr. */
+	
 	ContentResolver cr;
 	
-	/**
-	 * Instantiates a new gets the contact names.
-	 *
-	 * @param listener the listener
-	 * @param cr the cr
-	 */
+	
 	public GetContactNamesTask(OnContactLoadingComplete listener, ContentResolver cr) {
 		super();
 		this.listener = listener;
 		this.cr = cr;
 	}
-	
-	/* (non-Javadoc)
-	 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])
-	 */
+
 	@SuppressLint("UseSparseArrays")
 	@Override
 	protected HashMap<Integer, String> doInBackground(Void...nothing) {
@@ -47,9 +35,7 @@ public class GetContactNamesTask extends AsyncTask<Void, String, HashMap<Integer
 		try{
 	        cur = cr.query(ContactsContract.Contacts.CONTENT_URI,null,null,null,null);
 	        if (cur.getCount() > 0) {
-	            
-	        	
-	            Log.i("AutocompleteContacts", "Reading   contacts........");
+	            Log.i("AutocompleteContacts", "Reading   contacts...");
 	             
 	            String name = "";
 	            int id;
@@ -58,7 +44,13 @@ public class GetContactNamesTask extends AsyncTask<Void, String, HashMap<Integer
 	            {
 	                name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 	                id = cur.getInt(cur.getColumnIndex(ContactsContract.Contacts._ID));
-	                names.put(id, name);
+                    if(name != null) {
+                        names.put(id, name);
+                        if (name.contains("Aharon")) {
+                            Log.i("Autocompletecontacts", name);
+
+                        }
+                    }
 	            }
 	 
 	        }
