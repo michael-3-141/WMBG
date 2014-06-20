@@ -33,6 +33,7 @@ import com.perlib.wmbg.book.Book;
 import com.perlib.wmbg.interfaces.BookContainerActivity;
 import com.perlib.wmbg.interfaces.OnContactLoadingComplete;
 import com.perlib.wmbg.interfaces.OnEmailLoadingListener;
+import com.perlib.wmbg.misc.CommonLib;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -91,6 +92,12 @@ public class BookFragment extends Fragment implements OnContactLoadingComplete, 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Loop over the nameIdMap, find the contact id and get its email from contacts.
                 String selectedName = (String) parent.getItemAtPosition(position);
+                if(CommonLib.isEmail(selectedName))
+                {
+                    OnEmailLoadingCompleted(selectedName);
+                    etBookLendedTo.setText("");
+                    return;
+                }
                 String currentName;
                 for(Entry<Integer, String> row : nameIdMap.entrySet())
                 {
@@ -143,8 +150,8 @@ public class BookFragment extends Fragment implements OnContactLoadingComplete, 
             }
         });
 	}
-	
-	@Override
+
+    @Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 	    //Get the book from the parent activity
@@ -229,10 +236,6 @@ public class BookFragment extends Fragment implements OnContactLoadingComplete, 
 			if(row.getValue().length() != 0)
 			{
 				adapter.add(row.getValue());
-                if(row.getValue().contains("Aharon"))
-                {
-                    Log.i("Autocompletecontacts", row.getValue());
-                }
 			}
 		}
 	    adapter.notifyDataSetChanged();

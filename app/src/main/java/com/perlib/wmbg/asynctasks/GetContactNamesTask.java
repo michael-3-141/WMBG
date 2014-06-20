@@ -46,10 +46,6 @@ public class GetContactNamesTask extends AsyncTask<Void, String, HashMap<Integer
 	                id = cur.getInt(cur.getColumnIndex(ContactsContract.Contacts._ID));
                     if(name != null) {
                         names.put(id, name);
-                        if (name.contains("Aharon")) {
-                            Log.i("Autocompletecontacts", name);
-
-                        }
                     }
 	            }
 	 

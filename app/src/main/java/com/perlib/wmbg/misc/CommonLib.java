@@ -35,6 +35,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class CommonLib {
 
@@ -274,4 +275,8 @@ public class CommonLib {
 		}
 		return list;
 	}
+
+    public static boolean isEmail(String email) {
+        return Pattern.compile(".+@.+\\.[a-z]+").matcher(email).matches();
+    }
 }
