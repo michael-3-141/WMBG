@@ -84,8 +84,8 @@ public class ScanBook extends ActionBarActivity {
                     matchedLendedItems.add(item);
                     matchedLendedItemsPos.add(j);
                 }
-                j++;
             }
+            j++;
         }
 
         //
