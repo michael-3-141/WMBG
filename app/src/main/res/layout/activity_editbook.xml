@@ -15,18 +15,13 @@
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    tools:layout="@layout/fragment_book" />
-        
-		<TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/dateLended" />
 
-        <DatePicker
-            android:id="@+id/dpDateLended"
+        <Button
+            android:id="@+id/btnSetLendedDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:calendarViewShown="false" />
+            android:text="@string/setLendedDate"
+            android:layout_marginBottom="20dp"/>
 
         <Button
             android:id="@+id/btnEditBook"

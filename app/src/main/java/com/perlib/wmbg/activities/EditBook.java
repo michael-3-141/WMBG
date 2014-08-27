@@ -1,5 +1,6 @@
 package com.perlib.wmbg.activities;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,25 +18,27 @@ import android.widget.Toast;
 import com.perlib.wmbg.R;
 import com.perlib.wmbg.book.Book;
 import com.perlib.wmbg.fragments.BookFragment;
+import com.perlib.wmbg.fragments.DateLendedDialogFragment;
 import com.perlib.wmbg.interfaces.BookContainerActivity;
 import com.perlib.wmbg.misc.CommonLib;
 import com.perlib.wmbg.misc.PrefKeys;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
  * The EditBook activity.
  */
-public class EditBook extends ActionBarActivity implements BookContainerActivity {
+public class EditBook extends ActionBarActivity implements BookContainerActivity, DatePickerDialog.OnDateSetListener {
 
 	private List<Book> items = new ArrayList<Book>();
 	
 	private int editPos;
 	private Book editedItem;
 
-	private DatePicker dpDateLended;
+	private Button btnSetLendedDate;
 	private Button btnReturnBook;
 	private Button btnSendReminder;
 	private Button btnDelete;
@@ -59,7 +62,7 @@ public class EditBook extends ActionBarActivity implements BookContainerActivity
 
 	    //Create view references
 	    fmtBook = (BookFragment) getSupportFragmentManager().findFragmentById(R.id.bookFragment);
-	    dpDateLended = (DatePicker)findViewById(R.id.dpDateLended);
+	    btnSetLendedDate = (Button) findViewById(R.id.btnSetLendedDate);
 	    btnDelete = (Button) findViewById(R.id.btnDelete);
 	    btnReturnBook = (Button) findViewById(R.id.btnReturnBook);
 	    btnSendReminder = (Button) findViewById(R.id.btnSendReminder);
@@ -69,7 +72,6 @@ public class EditBook extends ActionBarActivity implements BookContainerActivity
 	    editedItem = items.get(editPos);
 	    GregorianCalendar editedDate = new GregorianCalendar();
 	    editedDate.setTimeInMillis(editedItem.getDateLended()*1000);
-	    dpDateLended.updateDate(editedDate.get(GregorianCalendar.YEAR), editedDate.get(GregorianCalendar.MONTH), editedDate.get(GregorianCalendar.DAY_OF_MONTH));
 	    
 	    //Remove unnecessary buttons. 
 	    if(!editedItem.isLended())
@@ -79,6 +81,14 @@ public class EditBook extends ActionBarActivity implements BookContainerActivity
 	    }
 	    
 	    //Listeners
+        btnSetLendedDate.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DateLendedDialogFragment fragment = new DateLendedDialogFragment(editedItem, EditBook.this);
+                fragment.show(getSupportFragmentManager(), "dateLendedDialogFragmnt");
+            }
+        });
+
 	    btnDelete.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -137,10 +147,6 @@ public class EditBook extends ActionBarActivity implements BookContainerActivity
                 //Validate book name
 				if(!(book.getName().length() == 0))
 				{
-                    //Set date lended to date lended DatePicker
-					GregorianCalendar dateLendedGc = new GregorianCalendar(dpDateLended.getYear(), dpDateLended.getMonth(), dpDateLended.getDayOfMonth());
-					book.setDateLended(dateLendedGc.getTimeInMillis()/1000);
-
                     //Save
                     items.set(editPos, book);
 					CommonLib.saveInfo(items);
@@ -171,4 +177,10 @@ public class EditBook extends ActionBarActivity implements BookContainerActivity
 		return editedItem;
 	}
 
+    //Implement DateSetListener for date picker dialog
+    @Override
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+        Calendar c = new GregorianCalendar(year, monthOfYear, dayOfMonth);
+        editedItem.setDateLended(c.getTimeInMillis() / 1000);
+    }
 }
