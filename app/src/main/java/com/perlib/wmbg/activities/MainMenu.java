@@ -3,29 +3,21 @@ package com.perlib.wmbg.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Parcelable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.perlib.wmbg.R;
 import com.perlib.wmbg.book.Book;
 import com.perlib.wmbg.interfaces.OnDownloadComplete;
 import com.perlib.wmbg.misc.CommonLib;
+import com.perlib.wmbg.misc.SharedPreferencesHelper;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class MainMenu extends Activity implements OnDownloadComplete {
 
@@ -36,7 +28,6 @@ public class MainMenu extends Activity implements OnDownloadComplete {
     Button btnHelp;
 	
 	IntentIntegrator scanIntegrator = new IntentIntegrator(this);
-	List<Book> items = new ArrayList<Book>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -51,8 +42,10 @@ public class MainMenu extends Activity implements OnDownloadComplete {
         btnSettings = (Button) findViewById(R.id.btnSettings);
         btnHelp = (Button) findViewById(R.id.btnHelp);
 
-        //Load items from file.
-	    loadData();
+        //Create book list if doesn't exist.
+        if(new SharedPreferencesHelper(this).getBookList() == null) {
+            new SharedPreferencesHelper(this).setBookList(new ArrayList<Book>());
+        }
 
         //Search book listener
 	    btnSearchBook.setOnClickListener(new OnClickListener() {
@@ -61,7 +54,6 @@ public class MainMenu extends Activity implements OnDownloadComplete {
 			public void onClick(View v) {
 				//Go to main list activity
 				Intent searchBook = new Intent(getApplicationContext(), MainActivity.class);
-				searchBook.putParcelableArrayListExtra("items", (ArrayList<? extends Parcelable>) items);
 				startActivity(searchBook);
 			}
 		});
@@ -83,7 +75,6 @@ public class MainMenu extends Activity implements OnDownloadComplete {
 			public void onClick(View v) {
                 //Go to addbook in manual mode
 				Intent addBook = new Intent(getApplicationContext(), AddBook.class);
-				addBook.putParcelableArrayListExtra("items", (ArrayList<? extends Parcelable>) items);
 				addBook.putExtra("mode", AddBook.MODE_MANUAL);
 				startActivity(addBook);
 			}
@@ -108,40 +99,6 @@ public class MainMenu extends Activity implements OnDownloadComplete {
                 startActivity(help);
             }
         });
-	}
-
-	private void loadData()
-	{
-        //Get the file
-		String fs = System.getProperty("file.separator");
-		File sd = Environment.getExternalStorageDirectory();
-		File listfile = new File(sd+fs+"booklist.txt");
-
-        //Check if file exists
-		if(listfile.exists())
-		{
-			try {
-				BufferedReader br = new BufferedReader(new FileReader(listfile));
-
-                //Read the item file using BufferedReader and convert to Book list using Gson
-				String line;
-				List<Book> list = new ArrayList<Book>();
-				Gson gson = new Gson();
-				Book[] bookArray = new Book[]{};
-				while((line = br.readLine()) != null)
-				{
-					bookArray = gson.fromJson(line, Book[].class);
-				}
-				list = new ArrayList<Book>(Arrays.asList(bookArray));
-                //Assign the read info to the items list and close reader
-				items = list;
-				br.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 
     //Handles response from barcode scanner
@@ -174,7 +131,6 @@ public class MainMenu extends Activity implements OnDownloadComplete {
 
         //Go to scan book activity to handle scan results.
 		Intent scanBook = new Intent(getApplicationContext(), ScanBook.class);
-		scanBook.putParcelableArrayListExtra("items", (ArrayList<? extends Parcelable>) items);
 		scanBook.putExtra("result", (Parcelable) result);
 		startActivity(scanBook);
 	}

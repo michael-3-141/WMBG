@@ -1,46 +1,38 @@
 package com.perlib.wmbg.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.perlib.wmbg.R;
 import com.perlib.wmbg.book.Book;
-import com.perlib.wmbg.fragments.BookFragment;
-import com.perlib.wmbg.interfaces.BookContainerActivity;
+import com.perlib.wmbg.fragments.EditBookFragment;
 import com.perlib.wmbg.misc.CommonLib;
+import com.perlib.wmbg.misc.Items;
 import com.perlib.wmbg.misc.PrefKeys;
 
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.List;
-
 /**
- * The EditBook activity.
+ * The Book editing activity. Not used on tablets, as tablets have two pane layout for the list.
  */
-public class EditBook extends ActionBarActivity implements BookContainerActivity {
+public class EditBook extends ActionBarActivity {
 
-	private List<Book> items = new ArrayList<Book>();
+	private Items items;
 	
 	private int editPos;
 	private Book editedItem;
 
-	private DatePicker dpDateLended;
 	private Button btnReturnBook;
 	private Button btnSendReminder;
 	private Button btnDelete;
 	private Button btnEdit;
-	private BookFragment fmtBook;
+	private EditBookFragment fmtBook;
 	
 	
 	@Override
@@ -54,12 +46,13 @@ public class EditBook extends ActionBarActivity implements BookContainerActivity
 
         //Get data from intent
 	    Bundle b = getIntent().getExtras();
-	    items = b.getParcelableArrayList("items");
 	    editPos = b.getInt("position");
 
+        //Get items
+        items = new Items(this);
+
 	    //Create view references
-	    fmtBook = (BookFragment) getSupportFragmentManager().findFragmentById(R.id.bookFragment);
-	    dpDateLended = (DatePicker)findViewById(R.id.dpDateLended);
+	    fmtBook = (EditBookFragment) getSupportFragmentManager().findFragmentById(R.id.bookFragment);
 	    btnDelete = (Button) findViewById(R.id.btnDelete);
 	    btnReturnBook = (Button) findViewById(R.id.btnReturnBook);
 	    btnSendReminder = (Button) findViewById(R.id.btnSendReminder);
@@ -67,9 +60,9 @@ public class EditBook extends ActionBarActivity implements BookContainerActivity
 	    
 	    //Get currently edited item and fill in fields with its data
 	    editedItem = items.get(editPos);
-	    GregorianCalendar editedDate = new GregorianCalendar();
-	    editedDate.setTimeInMillis(editedItem.getDateLended()*1000);
-	    dpDateLended.updateDate(editedDate.get(GregorianCalendar.YEAR), editedDate.get(GregorianCalendar.MONTH), editedDate.get(GregorianCalendar.DAY_OF_MONTH));
+        Bundle args = new Bundle();
+        args.putParcelable("book", editedItem);
+        fmtBook.setArguments(args);
 	    
 	    //Remove unnecessary buttons. 
 	    if(!editedItem.isLended())
@@ -83,20 +76,9 @@ public class EditBook extends ActionBarActivity implements BookContainerActivity
 			
 			@Override
 			public void onClick(View v) {
-				
-				CommonLib.deleteItem(editPos, PreferenceManager.getDefaultSharedPreferences(EditBook.this), EditBook.this, new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //Delete current book, save and go to main activity.
-                        items.remove(editPos);
-                        CommonLib.saveInfo(items);
-                        Intent main = new Intent(getApplicationContext(), MainActivity.class);
-                        main.putParcelableArrayListExtra("items", (ArrayList<? extends Parcelable>) items);
-                        startActivity(main);
-                    }
-                }, items);
-				
+				CommonLib.deleteItem(editPos, EditBook.this);
+                Intent main = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(main);
 			}
 		});
 	    
@@ -105,9 +87,8 @@ public class EditBook extends ActionBarActivity implements BookContainerActivity
 			@Override
 			public void onClick(View v) {
 				//Return book and go to main activity
-				items = CommonLib.returnItem(editPos, items);
+				CommonLib.returnItem(editPos, EditBook.this);
 				Intent main = new Intent(getApplicationContext(), MainActivity.class);
-				main.putParcelableArrayListExtra("items", (ArrayList<? extends Parcelable>) items);
 				startActivity(main);
 			}
 		});
@@ -137,21 +118,10 @@ public class EditBook extends ActionBarActivity implements BookContainerActivity
                 //Validate book name
 				if(!(book.getName().length() == 0))
 				{
-                    //Set date lended to date lended DatePicker
-					GregorianCalendar dateLendedGc = new GregorianCalendar(dpDateLended.getYear(), dpDateLended.getMonth(), dpDateLended.getDayOfMonth());
-					book.setDateLended(dateLendedGc.getTimeInMillis()/1000);
-
                     //Save
                     items.set(editPos, book);
-					CommonLib.saveInfo(items);
 
                     //Start main activity
-					/*Intent main = new Intent(getApplicationContext(), MainActivity.class);
-					Bundle b = new Bundle();
-					b.putParcelableArrayList("items", (ArrayList<? extends Parcelable>) items);
-					main.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					main.putExtras(b);
-					startActivity(main);*/
                     onBackPressed();
 					finish();
 				}
@@ -163,12 +133,6 @@ public class EditBook extends ActionBarActivity implements BookContainerActivity
 			}
 				
 		});
-	}
-
-    //Implement BookContainerActivity for book fragment
-	@Override
-	public Book getBook() {
-		return editedItem;
 	}
 
 }

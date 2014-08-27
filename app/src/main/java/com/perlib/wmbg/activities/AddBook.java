@@ -2,7 +2,6 @@ package com.perlib.wmbg.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -18,17 +17,16 @@ import com.perlib.wmbg.fragments.BookFragment;
 import com.perlib.wmbg.interfaces.BookContainerActivity;
 import com.perlib.wmbg.interfaces.OnDownloadComplete;
 import com.perlib.wmbg.misc.CommonLib;
+import com.perlib.wmbg.misc.Items;
 
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 /**
  * Add book activity. Used from scan book and for manual mode.
  */
 public class AddBook extends ActionBarActivity implements OnDownloadComplete, BookContainerActivity {
 
-	private List<Book> items = new ArrayList<Book>();
+	private Items items;
 	private DownloadBookInfoTask downloader;
     
     private EditText etISBN;
@@ -63,10 +61,12 @@ public class AddBook extends ActionBarActivity implements OnDownloadComplete, Bo
 	    etISBN = (EditText)findViewById(R.id.etISBN);
 	    fmtBook = (BookFragment) getSupportFragmentManager().findFragmentById(R.id.bookFragment);
 	    btnDownloadInfo = (Button)findViewById(R.id.btnDownloadInfo);
+
+        //Get items
+        items = new Items(this);
 	    
 	    //Get mode and apply changes
 	    Bundle b = getIntent().getExtras();
-	    items = b.getParcelableArrayList("items");
 	    mode = b.getInt("mode");
 	    Book book = b.getParcelable("book");
 	    if(mode == MODE_AUTO)
@@ -92,14 +92,9 @@ public class AddBook extends ActionBarActivity implements OnDownloadComplete, Bo
 
                     //Add item and save
                     items.add(book);
-					CommonLib.saveInfo(items);
 
                     //Go back to main activity and remove add book from activity stack to avoid confusion
 					Intent main = new Intent(getApplicationContext(), MainActivity.class);
-					Bundle b = new Bundle();
-					b.putParcelableArrayList("items", (ArrayList<? extends Parcelable>) items);
-					
-					main.putExtras(b);
 					main.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(main);
 					finish();

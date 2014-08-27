@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.perlib.wmbg.R;
-import com.perlib.wmbg.activities.MainActivity;
 import com.perlib.wmbg.book.Book;
 import com.squareup.picasso.Picasso;
 
@@ -24,48 +23,34 @@ import java.util.Locale;
 
 /**
  * A custom adapter to handle a list of books.
- * Can only be used in the MainActivity class.
  */
 public class BookAdapter extends BaseAdapter implements Filterable {
-	
-	/** The activity. */
-	private MainActivity activity;
-	
-	/** The colors. */
+
+	private Items items;
 	private int[] colors = new int[] { 0x30ffffff, 0x3099FF66 };
-	
-	/** The cx. */
-	private Context cx;
-	
-	/** The filtered. */
+    private Context cx;
 	boolean filtered;
-	
-	/** The Filtered list. */
 	private ArrayList<Book> FilteredList = new ArrayList<Book>();
+	private BookFilter filter = new BookFilter();
+
 	
-	/** The filter. */
-	private BookFilter filter = new BookFilter(); 
-	
-	/**
-	 * Instantiates a new book adapter.
-	 *
-	 * @param activity the activity
-	 */
-	public BookAdapter(MainActivity activity) {
-		this.activity = activity;
-		cx = activity.getApplicationContext();
+	public BookAdapter(Context cx) {
+        this.cx = cx;
+		items = new Items(cx);
 	}
 
-	/* (non-Javadoc)
-	 * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
-	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) cx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View v = inflater.inflate(R.layout.book_list_item, parent, false);
 
-		int colorPos = position % colors.length;
-		v.setBackgroundColor(colors[colorPos]);
+        if(!v.isSelected()) {
+            int colorPos = position % colors.length;
+            v.setBackgroundColor(colors[colorPos]);
+        }
+        else{
+            v.setBackgroundColor(0xFF5C993D);
+        }
 
 		Book item = getItem(position);
 
@@ -105,7 +90,7 @@ public class BookAdapter extends BaseAdapter implements Filterable {
 		try{
 			file = new File(item.getThumbnailUrl());
 		}catch(Exception e){
-			
+
 		}
 		if(file != null)
 		{
@@ -117,38 +102,30 @@ public class BookAdapter extends BaseAdapter implements Filterable {
 
         if(item.getThumbnailUrl() == "")return v;
 		Picasso.with(cx).load(item.getThumbnailUrl()).fit().centerCrop().into(iv);
-		
+
 		return v;
 	}
 
 
 	@Override
 	public int getCount() {
-		return !filtered ? activity.items.size() : FilteredList.size();
+		return !filtered ? items.size() : FilteredList.size();
 	}
 
 
 	@Override
 	public Book getItem(int position) {
-		return !filtered ? activity.items.get(position) : FilteredList.get(position);
+		return !filtered ? items.get(position) : FilteredList.get(position);
 	}
 
-	/* (non-Javadoc)
-	 * @see android.widget.Adapter#getItemId(int)
-	 */
 	@Override
 	public long getItemId(int position) {
 		return 0;
 	}
 
-	/**
-	 * The Class BookFilter.
-	 */
+	
 	public class BookFilter extends Filter{
-		
-        /* (non-Javadoc)
-         * @see android.widget.Filter#performFiltering(java.lang.CharSequence)
-         */
+
         @SuppressLint("DefaultLocale")
 		@Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -162,10 +139,10 @@ public class BookAdapter extends BaseAdapter implements Filterable {
             	return null;
             }
 
-            for(int i = 0; i<activity.items.size(); i++){
-                item = activity.items.get(i);
+            for(int i = 0; i<items.size(); i++){
+                item = items.get(i);
                 if(item.getName().toLowerCase().contains(filterString)){
-                    FilteredList.add(activity.items.get(i));
+                    FilteredList.add(items.get(i));
                 }
             }
             Result.values = FilteredList;
@@ -174,9 +151,6 @@ public class BookAdapter extends BaseAdapter implements Filterable {
             return Result;
         }
 
-        /* (non-Javadoc)
-         * @see android.widget.Filter#publishResults(java.lang.CharSequence, android.widget.Filter.FilterResults)
-         */
         @SuppressWarnings("unchecked")
 		@Override
         protected void publishResults(CharSequence constraint,FilterResults results) {
@@ -193,14 +167,8 @@ public class BookAdapter extends BaseAdapter implements Filterable {
         	}
         }
 	};
-	
-	/* (non-Javadoc)
-	 * @see android.widget.Filterable#getFilter()
-	 */
+
 	public Filter getFilter() {
 		return filter;
 	}
-	
-	
-	
 }

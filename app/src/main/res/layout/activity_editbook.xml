@@ -11,22 +11,10 @@
 
 		<fragment
 		    android:id="@+id/bookFragment"
-		    android:name="com.perlib.wmbg.fragments.BookFragment"
+		    android:name="com.perlib.wmbg.fragments.EditBookFragment"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    tools:layout="@layout/fragment_book" />
-        
-		<TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/dateLended" />
-
-        <DatePicker
-            android:id="@+id/dpDateLended"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:calendarViewShown="false" />
 
         <Button
             android:id="@+id/btnEditBook"

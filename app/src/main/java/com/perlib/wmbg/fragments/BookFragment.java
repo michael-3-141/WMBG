@@ -30,7 +30,6 @@ import com.perlib.wmbg.R;
 import com.perlib.wmbg.asynctasks.GetContactEmailTask;
 import com.perlib.wmbg.asynctasks.GetContactNamesTask;
 import com.perlib.wmbg.book.Book;
-import com.perlib.wmbg.interfaces.BookContainerActivity;
 import com.perlib.wmbg.interfaces.OnContactLoadingComplete;
 import com.perlib.wmbg.interfaces.OnEmailLoadingListener;
 import com.perlib.wmbg.misc.CommonLib;
@@ -63,7 +62,7 @@ public class BookFragment extends Fragment implements OnContactLoadingComplete, 
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_book, container, true);
+		return inflater.inflate(R.layout.fragment_book, container, false);
 	}
 	
 	@Override
@@ -154,8 +153,6 @@ public class BookFragment extends Fragment implements OnContactLoadingComplete, 
     @Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-	    //Get the book from the parent activity
-	    setViewedBook(((BookContainerActivity)getActivity()).getBook());
 	}
 	
 
@@ -168,6 +165,10 @@ public class BookFragment extends Fragment implements OnContactLoadingComplete, 
 	}
 
 	public Book getViewedBook() {
+        if(viewedBook == null)
+        {
+            this.viewedBook = new Book();
+        }
 		viewedBook.setName(etBookName.getText().toString());
 		viewedBook.setAuthor(etBookAuthor.getText().toString());
 		viewedBook.setLendedTo(etBookLendedTo.getText().toString());
@@ -182,7 +183,7 @@ public class BookFragment extends Fragment implements OnContactLoadingComplete, 
             this.viewedBook = new Book();
             return;
         }
-		this.viewedBook = viewedBook;
+        this.viewedBook = viewedBook;
 
         etBookName.setText(viewedBook.getName());
 		etBookAuthor.setText(viewedBook.getAuthor());
